@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: var(--aw_secondary_color);
+  background-color: var(--aw_primary_color);
+  font-family: var(--aw_secondary_font);
+  overflow-x: hidden;
+}
+/* global */
+:root {
+  --aw_primary_color: #fff;
+  --aw_secondary_color: #000;
+  --aw_theme_color: #f5c000;
+  --aw_accent_color: rgb(0, 25, 30);
+  --aw_primary_font: 'Playfair Display', serif;
+  --aw_secondary_font: 'Poppins', serif;
+}
+
+.primary-color {
+  color: var(--aw_primary_color) !important;
+}
+.secondary-color {
+  color: var(--aw_secondary_color) !important;
+}
+.theme-color {
+  color: var(--aw_theme_color) !important;
+}
+.accent-color {
+  color: var(--aw_accent_color) !important;
+}
+.font-primary {
+  font-family: var(--aw_primary_font) !important;
+}
+.font-secondary {
+  font-family: var(--aw_secondary_font) !important;
+}
+.bg-primary-color {
+  background-color: var(--aw_primary_color) !important;
+}
+.bg-secondary-color {
+  background-color: var(--aw_secondary_color) !important;
+}
+.bg-theme-color {
+  background-color: var(--aw_theme_color) !important;
+}
+
+section {
+  padding: 30px 0;
+}
+@media (min-width: 768px) {
+  section {
+    padding: 100px 0;
+  }
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+.shadow-light {
+  box-shadow: 0 0 11px rgba(0, 0, 0, 0.08);
+}
