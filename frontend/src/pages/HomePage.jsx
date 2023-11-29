@@ -1,10 +1,21 @@
-import React, { useState } from 'react';
-import Login from '../components/home/Login';
-import Register from '../components/home/Register';
-import Tab from '../components/home/Tab';
+import React, { useEffect, useState } from "react";
+import Login from "../components/home/Login";
+import Register from "../components/home/Register";
+import Tab from "../components/home/Tab";
+import axios from "axios";
 
 const HomePage = () => {
   const [activeTab, setActiveTab] = useState(true);
+
+  const fetchData = async () => {
+    const { data } = await axios.get("/api/chat");
+
+    console.log(data);
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <section className="bg-gradient-to-r from-cyan-500 to-blue-500 min-h-screen flex justify-center items-center">
       <div className="container mx-auto px-4">
