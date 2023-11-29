@@ -1,11 +1,12 @@
-import { useState } from 'react';
-import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
+import { useState } from "react";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 const Register = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [conPassword, setConPassword] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [conPassword, setConPassword] = useState("");
+  const [image, setImage] = useState();
   const [showPassword, setShowPassword] = useState(false);
   const [showConPassword, setShowConPassword] = useState(false);
 
@@ -15,7 +16,7 @@ const Register = () => {
     if (password === conPassword) {
       console.log(name, email, password);
     } else {
-      console.log('no match');
+      console.log("no match");
     }
   };
 
@@ -48,7 +49,7 @@ const Register = () => {
       {/* password */}
       <div className="relative">
         <input
-          type={showPassword ? 'text' : 'password'}
+          type={showPassword ? "text" : "password"}
           placeholder="Password"
           required
           value={password}
@@ -65,7 +66,7 @@ const Register = () => {
       {/* confirm password */}
       <div className="relative">
         <input
-          type={showConPassword ? 'text' : 'password'}
+          type={showConPassword ? "text" : "password"}
           placeholder="Confirm Password"
           required
           value={conPassword}
@@ -83,6 +84,13 @@ const Register = () => {
           )}
         </div>
       </div>
+      {/* image */}
+      <input
+        type="file"
+        accept="image/*"
+        value={image}
+        onChange={(e) => setImage(e.target.files[0])}
+      />
       <button
         type="submit"
         className="bg-cyan-500 hover:bg-cyan-600 text-white py-4 px-6 w-full rounded-md uppercase duration-300 leading-none font-bold text-lg"
