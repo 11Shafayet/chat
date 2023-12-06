@@ -37,7 +37,7 @@ const Login = () => {
         localStorage.setItem('userInfo', JSON.stringify(data));
         toast.success('Login Successful!');
         setLoading(false);
-        navigate.push('/chat');
+        navigate('/chat');
       } catch (error) {
         toast.warning('Failed To Log in!');
         setLoading(false);
@@ -59,7 +59,7 @@ const Login = () => {
         </h3>
         <input
           type="text"
-          placeholder="Your Name"
+          placeholder="Your Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           className="w-full min-h-[55px] shadow-light py-2 px-3 leading-6 focus:outline-cyan-500"
