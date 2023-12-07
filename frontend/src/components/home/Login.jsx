@@ -94,6 +94,10 @@ const Login = () => {
         <button
           type="submit"
           className="bg-rose-500 hover:bg-teal-600 text-white py-4 px-6 w-full rounded-md uppercase duration-300 leading-none font-bold text-lg"
+          onClick={() => {
+            setEmail('demo@gmail.com');
+            setPassword('123456');
+          }}
         >
           Guest Login
         </button>

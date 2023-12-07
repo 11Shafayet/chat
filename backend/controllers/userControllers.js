@@ -29,7 +29,7 @@ const registerUser = asyncHandler(async (req, res) => {
     });
   } else {
     res.status(400);
-    throw new Error('Failed to create new user!');
+    throw new Error('Failed to create new user from backend!');
   }
 });
 
