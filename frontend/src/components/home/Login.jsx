@@ -33,7 +33,6 @@ const Login = () => {
           config
         );
 
-        console.log(data);
         localStorage.setItem('userInfo', JSON.stringify(data));
         toast.success('Login Successful!');
         setLoading(false);
