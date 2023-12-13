@@ -19,7 +19,7 @@ const userSchema = mongoose.Schema(
     pic: {
       type: String,
       default:
-        'https://icon.library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg',
+        'https://jaggerbathroom.com/wp-content/uploads/2017/08/demo-user.png',
     },
     isAdmin: {
       type: Boolean,
@@ -37,7 +37,7 @@ userSchema.methods.matchPassword = async function (enteredPassowrd) {
 };
 
 userSchema.pre('save', async function (next) {
-  if (!this.isModified) {
+  if (!this.isModified('password')) {
     next();
   }
   const salt = await bcrypt.genSalt(10);
