@@ -6,12 +6,13 @@ import { getSender } from '../../config/chatLogics';
 import { ChatState } from '../../Context/ChatProvider';
 
 const MessageBox = ({ fetchAgain, setFetchAgain }) => {
+  const [messages, setMessages] = useState([]);
   const { selectedChat, loggedInUser } = ChatState();
   const [newMessage, setNewMessage] = useState('');
   const [loading, setLoading] = useState('');
 
   const fetchMessages = async () => {
-    if (!selectedChat) return;
+    if (!selectedChat || loggedInUser) return;
 
     try {
       const config = {
@@ -20,13 +21,13 @@ const MessageBox = ({ fetchAgain, setFetchAgain }) => {
         },
       };
       const { data } = await axios.get(
-        `http://localhost:5000/api/message/:${selectedChat._id}`,
+        `http://localhost:5000/api/message/${selectedChat._id}`,
         config
       );
-
       console.log(data);
+      setMessages(data);
     } catch (error) {
-      toast.warning('Something went wrong!');
+      toast.warning('Something went wrong while fetching messages!');
     }
   };
 
@@ -38,34 +39,37 @@ const MessageBox = ({ fetchAgain, setFetchAgain }) => {
       return;
     }
 
-    try {
-      setLoading(true);
-      const submitingData = {
-        content: newMessage,
-        chat: selectedChat._id,
-      };
+    if (loggedInUser) {
+      try {
+        setLoading(true);
+        const submitingData = {
+          content: newMessage,
+          chatId: selectedChat._id,
+        };
 
-      const config = {
-        headers: {
-          'Content-type': 'Application/json',
-          Authorization: `Bearer ${loggedInUser.token}`,
-        },
-      };
+        const config = {
+          headers: {
+            'Content-type': 'Application/json',
+            Authorization: `Bearer ${loggedInUser.token}`,
+          },
+        };
 
-      const { data } = await axios.post(
-        `http://localhost:5000/api/message/`,
-        submitingData,
-        config
-      );
+        const { data } = await axios.post(
+          `http://localhost:5000/api/message`,
+          submitingData,
+          config
+        );
 
-      console.log(data);
-    } catch (error) {
-      toast.warning('Error sending message!');
+        setMessages([data, ...messages]);
+      } catch (error) {
+        toast.warning('Error sending message!');
+      }
     }
   };
   useEffect(() => {
     fetchMessages();
-  }, [selectedChat]);
+    console.log(messages);
+  }, [selectedChat, messages]);
 
   return !selectedChat ? (
     <div className="h-full w-full flex justify-center items-center">
@@ -88,7 +92,9 @@ const MessageBox = ({ fetchAgain, setFetchAgain }) => {
       </div>
       {/* chat box */}
       <div className="w-full h-full bg-gray-100 rounded-lg p-3 flex flex-col justify-end">
-        <div>Hello</div>
+        {messages.map((message, i) => (
+          <h4 key={i}>{message.content}</h4>
+        ))}
         <form action="" className="flex gap-x-2" onSubmit={handleSubmit}>
           <input
             type="text"
