@@ -4,7 +4,6 @@ const User = require('../models/userModel');
 
 const accessChat = asyncHandler(async (req, res) => {
   const { userId } = req.body;
-  console.log(userId);
 
   if (!userId) {
     console.log('UserId param not sent with request');
@@ -26,7 +25,6 @@ const accessChat = asyncHandler(async (req, res) => {
     select: 'name pic email',
   });
 
-  console.log(isChat);
 
   if (isChat.length > 0) {
     res.send(isChat[0]);

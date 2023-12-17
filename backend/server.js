@@ -29,7 +29,29 @@ app.use(notFound);
 app.use(errorHandler);
 
 //listening port
-app.listen(
+const server = app.listen(
   process.env.PORT,
   console.log(`Server is running on port ${process.env.PORT}`)
 );
+
+const io = require('socket.io')(server, {
+  pingTimeout: 60000,
+  cors: {
+    origin: 'http://localhost:5173',
+  },
+});
+
+io.on('connection', (socket) => {
+  console.log('connected to socket.io');
+
+  socket.on('setup', (userData) => {
+    console.log(userData._id);
+    socket.join(userData._id);
+    socket.emit('connected');
+  });
+
+  socket.on('join chat', (room) => {
+    socket.join(room);
+    console.log('user joined room' + room);
+  });
+});

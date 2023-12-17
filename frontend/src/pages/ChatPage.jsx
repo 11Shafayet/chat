@@ -28,7 +28,7 @@ const ChatPage = () => {
           <div className="col-span-10 sm:col-span-4 md:col-span-3 shadow-light w-full p-4 rounded-lg sm:h-full">
             <Sidebar fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />
           </div>
-          <div className="col-span-10 sm:col-span-6 md:col-span-7 shadow-light w-full p-4 rounded-lg">
+          <div className="col-span-10 sm:col-span-6 md:col-span-7 shadow-light w-full p-4 rounded-lg max-h-[85vh]">
             <MessageBox
               fetchAgain={fetchAgain}
               setFetchAgain={setFetchAgain}
